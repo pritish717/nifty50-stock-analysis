@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: stg_stock_prices
+    description: "Cleaned and standardized daily stock price data for NIFTY-50 constituents."
+    columns:
+      - name: trade_date
+        description: "Trading date."
+        tests:
+          - not_null
+      - name: symbol
+        description: "NSE stock ticker symbol."
+        tests:
+          - not_null
+      - name: open_price
+        description: "Opening price (INR)."
+      - name: high_price
+        description: "Day's highest price (INR)."
+      - name: low_price
+        description: "Day's lowest price (INR)."
+      - name: close_price
+        description: "Closing price (INR)."
+        tests:
+          - not_null
+      - name: prev_close_price
+        description: "Previous day's closing price (INR)."
+      - name: vwap
+        description: "Volume Weighted Average Price (INR)."
+      - name: volume
+        description: "Total shares traded."
+      - name: turnover
+        description: "Total turnover in INR."
+      - name: trades
+        description: "Number of trades."
+      - name: deliverable_volume
+        description: "Shares actually delivered/settled."
+      - name: delivery_pct
+        description: "Deliverable volume as percentage of total volume."
+      - name: daily_return_pct
+        description: "Daily return as percentage change from previous close."
+      - name: price_range
+        description: "Intraday price range (high - low)."
+
+  - name: stg_stock_metadata
+    description: "NIFTY-50 stock metadata with sector classification (from seed)."
+    columns:
+      - name: symbol
+        description: "NSE stock ticker symbol."
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "Full company name."
+      - name: sector
+        description: "Industry sector classification."
+        tests:
+          - not_null

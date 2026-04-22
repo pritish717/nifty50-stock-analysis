@@ -1,0 +1,46 @@
+version: '3.8'
+
+volumes:
+  prefect_data:
+
+services:
+
+  prefect-server:
+    image: prefecthq/prefect:3-latest
+    command: prefect server start --host 0.0.0.0
+    ports:
+      - "4200:4200"
+    volumes:
+      - prefect_data:/root/.prefect
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4200/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+    environment:
+      - KAGGLE_USERNAME=${KAGGLE_USERNAME}
+      - KAGGLE_KEY=${KAGGLE_KEY}
+      - PREFECT_API_URL=http://prefect-server:4200/api
+    depends_on:
+      prefect-server:
+        condition: service_healthy
+
+  evidence:
+    build:
+      context: ./evidence
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/sources/warehouse/data/
+    ports:
+      - "3000:3000"
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+    restart: on-failure

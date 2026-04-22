@@ -1,0 +1,36 @@
+sources:
+- name: raw
+  description: Raw NIFTY-50 stock price data from Kaggle.
+  schema: raw
+  tables:
+    - name: stock_prices
+      description: Daily OHLCV data for all NIFTY-50 stocks combined from individual CSVs.
+      columns:
+      - name: Date
+        description: Trading date
+      - name: Symbol
+        description: NSE stock ticker symbol
+      - name: Prev Close
+        description: Previous day's closing price (INR)
+      - name: Open
+        description: Opening price (INR)
+      - name: High
+        description: Highest price during the day (INR)
+      - name: Low
+        description: Lowest price during the day (INR)
+      - name: Last
+        description: Last traded price (INR)
+      - name: Close
+        description: Closing price (INR)
+      - name: VWAP
+        description: Volume Weighted Average Price (INR)
+      - name: Volume
+        description: Total number of shares traded
+      - name: Turnover
+        description: Total turnover value (INR)
+      - name: Trades
+        description: Number of trades executed
+      - name: Deliverable Volume
+        description: Number of shares delivered (settled)
+      - name: "%Deliverble"
+        description: Percentage of deliverable volume to total traded volume

@@ -1,0 +1,1 @@
+select * from analytics_analytics.mart_monthly_performance
