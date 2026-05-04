@@ -241,7 +241,7 @@ Distributed under the MIT License. See `LICENSE` for details.
 **Pritish Chaudhary**
 
 - GitHub: [@pritish717](https://github.com/pritish717)
-- Email: [pritish717@gmail.com](mailto:pritish717@gmail.com)
+- LinkedIn: [Pritish Chaudhary](https://www.linkedin.com/in/pritish-chaudhary/)
 
 ---
 
